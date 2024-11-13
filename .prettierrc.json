@@ -1,6 +1,6 @@
 {
   "trailingComma": "all",
-  "semicolon": true,
+  "semi": true,
   "singleQuote": true,
   "endOfLine": "lf",
   "tabWidth": 2

@@ -4,16 +4,37 @@
   "description": "dependencies for this project",
   "main": "index.html",
   "scripts": {
-    "start": "node index.js",
-    "build": "npx webpack",
+    "prepare": "husky install",
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
     "test": "npm jest",
     "deploy": "gh-pages -d dist"
   },
   "author": "Aadit Harshal Baldha",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
+    "@babel/preset-typescript": "^7.26.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "babel-loader": "^9.2.1",
+    "css-loader": "^7.1.2",
     "eslint": "^9.14.0",
+    "html-webpack-plugin": "^5.6.3",
+    "husky": "^9.1.6",
     "jest": "^29.7.0",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.3",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }
