@@ -4,7 +4,7 @@
   "description": "dependencies for this project",
   "main": "index.html",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "test": "npm jest",
