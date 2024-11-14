@@ -1,5 +1,5 @@
-#!/usr/bin/env sh
-. "$(dirname "$0")/h"
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
 echo "Checking code style of all the files"
 npx prettier --check . || exit 1
