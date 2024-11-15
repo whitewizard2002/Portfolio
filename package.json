@@ -4,7 +4,7 @@
   "description": "dependencies for this project",
   "main": "index.html",
   "scripts": {
-    "prepare": "husky",
+    "prepare": "husky install",
     "format": "npx prettier --write . && git add -A .",
     "format-check": "npx prettier --check .",
     "lint": "npx eslint .",
