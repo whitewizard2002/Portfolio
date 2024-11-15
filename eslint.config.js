@@ -5,14 +5,12 @@ const tsParser = require('@typescript-eslint/parser');
 
 module.exports = [
   {
-    globals: {
-      structuredClone: 'readonly', // Allow structuredClone as a global variable
-    },
     languageOptions: {
       globals: {
         browser: 'readonly', // Equivalent to env: browser
         node: 'readonly', // Equivalent to env: node
         es2021: 'readonly', // Equivalent to es2021
+        structuredClone: 'readonly',
       },
       parser: tsParser,
       parserOptions: {
