@@ -27,7 +27,7 @@ jobs:
 
       - name: Run Formatter
         run: npx prettier --check .
-        # Replace `format` with the appropriate formatting command, 
+        # Replace `format` with the appropriate formatting command,
         # like `prettier . --check`, to ensure code is formatted.
 
       - name: Commit formatted code (if any changes were made)
@@ -38,4 +38,3 @@ jobs:
           git add .
           git commit -m "chore: apply Prettier formatting"
           git push
-
