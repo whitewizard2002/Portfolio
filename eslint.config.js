@@ -55,12 +55,6 @@ module.exports = [
         version: 'detect', // Automatically detect React version
       },
     },
-    ignorePatterns: [
-      'node_modules/',
-      'dist/',
-      'build/',
-      '*.min.js',
-      'coverage/',
-    ],
+    ignores: ['node_modules/', 'dist/', 'build/', '*.min.js', 'coverage/'],
   },
 ];
