@@ -1,1 +1,37 @@
+name: Lint and Format
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Specify your node version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Linter
+        run: npm run lint
+        # Replace `lint` with the appropriate linting command (e.g., `eslint .`)
+
+      - name: Run Formatter
+        run: npm run format -- --check
+        # Replace `format` with the appropriate formatting command, 
+        # like `prettier . --check`, to ensure code is formatted.
+
+      - name: Check for Unformatted Files
+        run: |
+          git diff --exit-code || (echo "Code is not properly formatted. Please run 'npm run format'." && exit 1)
+        # This step ensures that the workflow fails if code is unformatted.
 
