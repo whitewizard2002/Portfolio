@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Run Linter
-        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+        run: npx eslint .
         # Replace `lint` with the appropriate linting command (e.g., `eslint .`)
 
       - name: Run Formatter
