@@ -4,16 +4,9 @@ const pluginImport = require('eslint-plugin-import');
 const tsParser = require('@typescript-eslint/parser');
 
 // Flat config format
-module.exports = {
+module.exports = [
   // Specify the parser and parser options
-  parser: tsParser,
-  parserOptions: {
-    ecmaVersion: 2021,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
-  },
+  {
   // Define the environments and globals
   env: {
     browser: true,
@@ -63,4 +56,15 @@ module.exports = {
   },
   // Define directories/files to ignore
   ignorePatterns: ['node_modules/', 'dist/', 'build/', '*.min.js', 'coverage/'],
-};
+},
+{
+    // TypeScript parser and parserOptions must be defined directly here
+    parser: tsParser,
+    parserOptions: {
+      ecmaVersion: 2021,
+      sourceType: 'module',
+      ecmaFeatures: {
+        jsx: true,
+      },
+    },
+}];
