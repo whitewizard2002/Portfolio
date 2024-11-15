@@ -1,8 +1,9 @@
-import pluginReact from 'eslint-plugin-react';
-import pluginJsxA11y from 'eslint-plugin-jsx-a11y';
-import pluginImport from 'eslint-plugin-import';
+const pluginReact = require('eslint-plugin-react');
+const pluginJsxA11y = require('eslint-plugin-jsx-a11y');
+const pluginImport = require('eslint-plugin-import');
+const tsParser = require('@typescript-eslint/parser');
 
-export default [
+module.exports = [
   {
     languageOptions: {
       globals: {
@@ -10,7 +11,7 @@ export default [
         node: 'readonly', // Equivalent to env: node
         es2021: 'readonly', // Equivalent to es2021
       },
-      parser: '@typescript-eslint/parser',
+      parser: tsParser,
       parserOptions: {
         ecmaVersion: 12,
         sourceType: 'module',
