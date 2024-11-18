@@ -12,7 +12,7 @@ export const WelcomeBtn: React.FC<WelcomeBtnProps> = (props) => {
   };
 
   return (
-    <BtnWrapper test-id="welcomebtn-test" onClick={toResumePage}>
+    <BtnWrapper data-testid="welcomebtn-test" onClick={toResumePage}>
       <TextTyper size="25px" weight="bold" text={props.text} />
     </BtnWrapper>
   );
