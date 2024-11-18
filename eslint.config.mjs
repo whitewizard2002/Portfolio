@@ -11,6 +11,7 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   {
+    plugins: ['react-hooks'],
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 0,
