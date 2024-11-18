@@ -37,7 +37,7 @@ export const FloatingCircles: React.FC<FloatingCirclesProps> = (props) => {
   }, []);
 
   useEffect(() => {
-    const handleCursorMove = (event: MouseEvent) => {
+    const handleCursorMove = () => {
       const updatedCircles = circlesArr.map((circle, i) => {
         if (i < props.count) {
           const offset = {
