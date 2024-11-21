@@ -1,79 +1,50 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Circle } from './Circle';
 import React from 'react';
-
+import styled from 'styled-components';
 interface FloatingCirclesProps {
   count: number;
 }
 
+interface Circle {
+  size: number;
+  opacity: number;
+  position: { x: number; y: number };
+}
+
 export const FloatingCircles: React.FC<FloatingCirclesProps> = (props) => {
-  const [circlesArr, setCirclesArr] = useState<
-    {
-      size: number;
-      opacity: number;
-      position: { x: number; y: number };
-      offset: { x: number; y: number };
-    }[]
-  >([]);
+  const [circlesArr, setCirclesArr] = React.useState<Circle[]>([]);
 
+  /** for setting up the floating circles */
   useEffect(() => {
-    for (let i = 0; i < props.count; i++) {
-      const size = 10;
-      const opacity = Math.random() * 0.8 + 0.2;
+    const initialCirclesArr = Array.from({ length: props.count }, () => {
+      const size = Math.floor(Math.random() * 15) + 5;
+      const opacity = Number(Math.random().toFixed(2));
       const position = {
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
+        x: Math.random() * window.innerWidth - 20,
+        y: Math.random() * window.innerHeight - 20,
       };
-      const offset = {
-        x: Math.random() * 30 - 15,
-        y: Math.random() * 30 - 15,
-      };
+      return { size, opacity, position };
+    });
+    setCirclesArr(initialCirclesArr);
+  }, [props.count]);
 
-      setCirclesArr((prevCirclesArr) => [
-        ...prevCirclesArr,
-        { size: size, opacity: opacity, position: position, offset: offset },
-      ]);
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleCursorMove = () => {
-      const updatedCircles = circlesArr.map((circle, i) => {
-        if (i < props.count) {
-          const offset = {
-            x: Math.random() * 30 - 15,
-            y: Math.random() * 30 - 15,
-          };
-
-          return {
-            ...circle,
-            offset: offset,
-          };
-        }
-        return circle;
-      });
-      setCirclesArr(updatedCircles);
-    };
-
-    document.body.addEventListener('mousemove', handleCursorMove);
-
-    return () => {
-      document.body.removeEventListener('mousemove', handleCursorMove);
-    };
-  }, []);
   return (
-    <>
+    <Wrapper>
       {/* Render all circles */}
       {circlesArr.map((circle, index) => (
         <Circle
-          color="#ffffff"
+          color="#E1E2E2"
           key={index}
           size={circle.size}
           opacity={circle.opacity}
           position={circle.position}
-          offset={circle.offset}
         />
       ))}
-    </>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+`;
