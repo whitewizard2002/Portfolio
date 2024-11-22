@@ -1,5 +1,6 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import React from 'react';
+import { AppContext } from '../../App';
 
 interface CircleProps {
   color: string;
@@ -10,11 +11,23 @@ interface CircleProps {
 
 export const Circle: React.FC<CircleProps> = (props) => {
   const colors = ['#2CCCC3', '#FACD3D', '#5626C4', '#E60576'];
-
+  const { welcomeBtnClicked } = React.useContext(AppContext);
+  const [goUpAnimationEnded, setGoUpAnimationEnded] = React.useState(false);
   const generateRandomValue = (min: number = -20, max: number = 20) =>
     Math.random() * (max - min) + min;
 
   const index = generateRandomValue(0, colors.length - 1);
+
+  React.useEffect(() => {
+    addEventListener('animationend', (event) => {
+      console.log(event);
+      setGoUpAnimationEnded(true);
+    });
+
+    return () => {
+      removeEventListener('animationend', () => {});
+    };
+  }, []);
 
   return (
     <CircleContent
@@ -26,6 +39,7 @@ export const Circle: React.FC<CircleProps> = (props) => {
       randomX={generateRandomValue()}
       randomY={generateRandomValue()}
       animationDuration={generateRandomValue(7, 10)}
+      doGoUpAnimation={welcomeBtnClicked}
     />
   );
 };
@@ -40,6 +54,12 @@ const floatAnimation = keyframes`
   }
 `;
 
+const goUpAnimation = keyframes`
+  to{
+    top: -22px;
+  }
+`;
+
 const CircleContent = styled.div<{
   color: string;
   size: number;
@@ -48,6 +68,7 @@ const CircleContent = styled.div<{
   randomX: number;
   randomY: number;
   animationDuration: number;
+  doGoUpAnimation: boolean;
 }>`
   width: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
@@ -64,4 +85,10 @@ const CircleContent = styled.div<{
     ease-in-out infinite;
   box-shadow: ${(props) =>
     `0px 0px 5px 2px rgba(255,255,255, ${props.opacity})`};
+
+  ${(props) =>
+    props.doGoUpAnimation &&
+    css`
+      animation: ${goUpAnimation} 2s ease-in-out forwards;
+    `}
 `;

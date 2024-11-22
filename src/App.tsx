@@ -9,6 +9,7 @@ import { CyanSquare } from './lib/components/CyanSquare';
 import { YellowTriangle } from './lib/components/YellowTriangle';
 import { PurpleHexagon } from './lib/components/PurpleHexagon';
 import { PinkCircle } from './lib/components/PinkCircle';
+import { SkillCard } from './lib/components/SkillCard';
 
 export const AppContext = React.createContext<{ welcomeBtnClicked: boolean }>({
   welcomeBtnClicked: false,
@@ -41,6 +42,15 @@ const App: React.FC = (): ReactNode => {
                 onClick={handleWelcomeBtnClick}
               />
             </WelcomeBtnWrapper>
+
+            {welcomeBtnClicked && (
+              <SkillCardArray>
+                <SkillCard type="Languages" />
+                <SkillCard type="Databases" />
+                <SkillCard type="Tech" />
+              </SkillCardArray>
+            )}
+
             <FloatingCircles count={100} />
             <CyanSquare />
             <YellowTriangle />
@@ -59,8 +69,8 @@ const AppWrapper = styled.div`
   background: ${(props) =>
     `linear-gradient(to bottom, ${props.theme.black}, ${props.theme.light_black})`};
   width: 100%;
-  overflow-y: clip;
-  overflow-x: clip;
+  /* overflow-y: clip; */
+  /* overflow-x: clip; */
 `;
 
 const fadeOut = keyframes`
@@ -85,6 +95,12 @@ const WelcomeTxtWrapper = styled.div<{ btnClicked: boolean }>`
 
 const WelcomeBtnWrapper = styled.div`
   display: flex;
+`;
+
+const SkillCardArray = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
 `;
 
 export default App;
