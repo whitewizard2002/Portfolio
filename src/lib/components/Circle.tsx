@@ -20,7 +20,6 @@ export const Circle: React.FC<CircleProps> = (props) => {
 
   React.useEffect(() => {
     addEventListener('animationend', (event) => {
-      console.log(event);
       setGoUpAnimationEnded(true);
     });
 

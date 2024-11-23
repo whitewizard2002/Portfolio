@@ -17,9 +17,13 @@ export const AppContext = React.createContext<{ welcomeBtnClicked: boolean }>({
 
 const App: React.FC = (): ReactNode => {
   const [welcomeBtnClicked, setWelcomeBtnClicked] = React.useState(false);
-
+  const [removeWelcomeText, setRemoveWelcomeText] = React.useState(false);
   const handleWelcomeBtnClick = () => {
     setWelcomeBtnClicked(true);
+  };
+
+  const removeWelcomeTxt = () => {
+    setRemoveWelcomeText(true);
   };
 
   return (
@@ -27,15 +31,20 @@ const App: React.FC = (): ReactNode => {
       <AppContext.Provider value={{ welcomeBtnClicked }}>
         <AppWrapper>
           <Column>
-            <WelcomeTxtWrapper btnClicked={welcomeBtnClicked}>
-              <TextTyper
-                text="Welcome"
-                weight="bold"
-                size="150px"
-                color="#ffffff"
-                style={{ textShadow: '0px 0px 5px 2px rgba(255,255,255,1)' }}
-              />
-            </WelcomeTxtWrapper>
+            {!removeWelcomeText && (
+              <WelcomeTxtWrapper
+                btnClicked={welcomeBtnClicked}
+                onAnimationEnd={removeWelcomeTxt}
+              >
+                <TextTyper
+                  text="Welcome"
+                  weight="bold"
+                  size="150px"
+                  color="#ffffff"
+                  style={{ textShadow: '0px 0px 5px 2px rgba(255,255,255,1)' }}
+                />
+              </WelcomeTxtWrapper>
+            )}
             <WelcomeBtnWrapper>
               <WelcomeBtn
                 text="Know about me"
@@ -52,10 +61,11 @@ const App: React.FC = (): ReactNode => {
             )}
 
             <FloatingCircles count={100} />
-            <CyanSquare />
-            <YellowTriangle />
-            <PurpleHexagon />
-            <PinkCircle />
+
+            {welcomeBtnClicked && <CyanSquare />}
+            {welcomeBtnClicked && <PurpleHexagon />}
+            {welcomeBtnClicked && <PinkCircle />}
+            {welcomeBtnClicked && <YellowTriangle />}
           </Column>
         </AppWrapper>
       </AppContext.Provider>

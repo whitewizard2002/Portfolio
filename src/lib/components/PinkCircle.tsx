@@ -1,13 +1,26 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import React from 'react';
+import { AppContext } from '../../App';
 
 export const PinkCircle: React.FC = () => {
+  const { welcomeBtnClicked } = React.useContext(AppContext);
   return (
-    <PinkCircleWrapper>
+    <PinkCircleWrapper appear={welcomeBtnClicked}>
       <CircleContent />
     </PinkCircleWrapper>
   );
 };
+
+const appearAnimation = keyframes`
+  0%{
+    top: -400px;
+    right: -50px;
+  }
+  100%{
+    top: -200px;
+    right: -50px;
+  }
+`;
 
 const sizeInOut = keyframes`
     0%{
@@ -21,14 +34,20 @@ const sizeInOut = keyframes`
     }
 `;
 
-const PinkCircleWrapper = styled.div`
+const PinkCircleWrapper = styled.div<{ appear: boolean }>`
   display: flex;
   position: absolute;
-  bottom: 0;
-  right: 0;
-  animation: ${sizeInOut} 10s ease-in-out infinite;
-  height: 100px;
-  width: 100px;
+  top: -500px;
+  right: -75px;
+  ${(props) =>
+    props.appear &&
+    css`
+      animation:
+        ${appearAnimation} 4s ease-in-out forwards 0.25s,
+        ${sizeInOut} 10s ease-in-out infinite;
+    `}
+  height: 375px;
+  width: 375px;
 `;
 
 const CircleContent = styled.div`

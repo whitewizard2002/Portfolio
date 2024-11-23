@@ -14,7 +14,6 @@ export const SkillCard: React.FC<SkillCardProps> = (props) => {
     'Github',
     'React',
     'ExpressJS',
-    'Django',
     'Stylus',
     'SASS',
   ];
@@ -26,12 +25,6 @@ export const SkillCard: React.FC<SkillCardProps> = (props) => {
           <Content>
             {props.type === 'Languages' ? (
               <>
-                <TextTyper
-                  text="Languages"
-                  size="16px"
-                  weight="bold"
-                  color="#ffffff"
-                />
                 <SkillCircleArray>
                   {languages.map((language) => {
                     return <SkillCircle key={language} text={language} />;
@@ -40,12 +33,6 @@ export const SkillCard: React.FC<SkillCardProps> = (props) => {
               </>
             ) : props.type === 'Databases' ? (
               <>
-                <TextTyper
-                  text="Databases"
-                  size="16px"
-                  weight="bold"
-                  color="#ffffff"
-                />
                 <SkillCircleArray>
                   {databases.map((database) => {
                     return <SkillCircle key={database} text={database} />;
@@ -54,12 +41,6 @@ export const SkillCard: React.FC<SkillCardProps> = (props) => {
               </>
             ) : (
               <>
-                <TextTyper
-                  text="Technologies"
-                  size="16px"
-                  weight="bold"
-                  color="#ffffff"
-                />
                 <SkillCircleArray>
                   {technologies.map((technologies) => {
                     return (
@@ -120,5 +101,6 @@ const SkillCircleArray = styled.div`
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: space-evenly;
-  gap: 4px;
+  gap: 20px;
+  padding: 20px;
 `;

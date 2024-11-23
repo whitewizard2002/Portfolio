@@ -1,29 +1,50 @@
 import React, { ReactNode } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+import { AppContext } from '../../App';
 
 export const CyanSquare: React.FC = (): ReactNode => {
-  return <CyanSquareWrapper id="CyanSquare-id"></CyanSquareWrapper>;
+  const { welcomeBtnClicked } = React.useContext(AppContext);
+
+  return <CyanSquareWrapper id="CyanSquare-id" appear={welcomeBtnClicked} />;
 };
 
 const rotateAround = keyframes`
     0%{
-        transform: rotate(0deg);
+        transform: rotate(-45deg);
     }
     50%{
-        transform: rotate(45deg);
+        transform: rotate(-77deg);
     }
     100%{
-        transform: rotate(0deg);
+        transform: rotate(-45deg);
     }
 `;
 
-const CyanSquareWrapper = styled.div`
+const appearAnimation = keyframes`
+  0%{
+    top: -600px;
+    left: -100px;
+  }
+  100%{
+    top: -300px;
+    left: -100px;
+  }
+`;
+
+const CyanSquareWrapper = styled.div<{ appear: boolean }>`
   display: flex;
   position: absolute;
-  left: 0;
-  top: 0;
-  animation: ${rotateAround} 10s ease-in-out infinite;
+  left: -100px;
+  top: -600px;
   width: 400px;
   height: 400px;
   background-color: ${(props) => props.theme.cyan};
+  border-radius: 20px;
+  ${(props) =>
+    props.appear &&
+    css`
+      animation:
+        ${appearAnimation} 4s ease-in-out forwards 0.25s,
+        ${rotateAround} 10s ease-in-out infinite;
+    `};
 `;

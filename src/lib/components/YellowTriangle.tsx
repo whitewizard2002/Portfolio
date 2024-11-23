@@ -1,40 +1,60 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { AppContext } from '../../App';
 
 export const YellowTriangle: React.FC = () => {
+  const { welcomeBtnClicked } = React.useContext(AppContext);
+
   return (
-    <YellowTriangleWrapper>
+    <YellowTriangleWrapper appear={welcomeBtnClicked}>
       <Triangle />
     </YellowTriangleWrapper>
   );
 };
 
+const appearAnimation = keyframes`
+  0%{
+    top: -500px;
+    right: 190px;
+  }
+  100%{
+    top: -100px;
+    right: 190px;
+  }
+`;
+
 const rotateAround = keyframes`
     0%{
-        transform: rotate(0deg);
+        transform: rotate(10deg);
     }
     50%{
-        transform: rotate(45deg);
+        transform: rotate(20deg);
     }
     100%{
-        transform: rotate(0deg);
+        transform: rotate(10deg);
     }
 `;
 
-const YellowTriangleWrapper = styled.div`
+const YellowTriangleWrapper = styled.div<{ appear: boolean }>`
   display: flex;
   position: absolute;
-  top: 0;
-  right: 0;
-  animation: ${rotateAround} 10s ease-in-out infinite;
+  top: -500px;
+  right: 190px;
+  ${(props) =>
+    props.appear === true &&
+    css`
+      animation:
+        ${appearAnimation} 4s ease-in-out forwards 0.25s,
+        ${rotateAround} 20s ease-in-out infinite;
+    `}
 `;
 
 const Triangle = styled.div`
   width: 0;
   height: 0;
-  border-left: 100px solid transparent;
-  border-right: 100px solid transparent;
+  border-left: 200px solid transparent;
+  border-right: 200px solid transparent;
   ${(props) => css`
-    border-bottom: 100px solid ${props.theme.yellow};
+    border-bottom: 200px solid ${props.theme.yellow};
   `};
 `;

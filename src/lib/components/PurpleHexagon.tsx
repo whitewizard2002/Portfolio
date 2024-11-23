@@ -1,8 +1,10 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import React from 'react';
+import { AppContext } from '../../App';
 export const PurpleHexagon: React.FC = () => {
+  const { welcomeBtnClicked } = React.useContext(AppContext);
   return (
-    <PurpleHexagonWrapper>
+    <PurpleHexagonWrapper appear={welcomeBtnClicked}>
       <Hexagon />
     </PurpleHexagonWrapper>
   );
@@ -12,25 +14,40 @@ const rotateAround = keyframes`
     0%{
         transform: rotate(0deg);
     }
-    50%{
-        transform: rotate(45deg);
-    }
     100%{
-        transform: rotate(0deg);
+        transform: rotate(360deg);
     }
 `;
 
-const PurpleHexagonWrapper = styled.div`
+const appearAnimation = keyframes`
+  0%{
+    top: -700px;
+    left: 190px;
+  }
+  100%{
+    top: -300px;
+    left: 190px;
+  }
+`;
+
+const PurpleHexagonWrapper = styled.div<{ appear: boolean }>`
   display: flex;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  animation: ${rotateAround} 10s ease-in-out infinite;
+  left: 190px;
+  top: -700px;
+  ${(props) =>
+    props.appear &&
+    css`
+      animation:
+        ${appearAnimation} 4s ease-in-out forwards 0.25s,
+        ${rotateAround} 20s ease-in-out infinite;
+    `}
 `;
 
 const Hexagon = styled.div`
-  height: 110px;
-  width: 100px;
+  height: 440px;
+  width: 400px;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   background-color: ${(props) => props.theme.purple};
+  border-radius: 20px;
 `;
