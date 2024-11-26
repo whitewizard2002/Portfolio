@@ -19,7 +19,7 @@ export const Circle: React.FC<CircleProps> = (props) => {
   const index = generateRandomValue(0, colors.length - 1);
 
   React.useEffect(() => {
-    addEventListener('animationend', (event) => {
+    addEventListener('animationend', () => {
       setGoUpAnimationEnded(true);
     });
 

@@ -14,12 +14,13 @@ export default [
   {
     plugins: { 'react-hooks': reactHooks },
     rules: {
-      'react/react-in-jsx-scope': 'off',
+      'react/react-in-jsx-scope': 'on',
       'react/prop-types': 0,
       'no-console': 'warn',
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       'no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': 'warn',
     },
   },
 ];
