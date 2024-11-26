@@ -14,7 +14,7 @@ export default [
   {
     plugins: { 'react-hooks': reactHooks },
     rules: {
-      'react/react-in-jsx-scope': 'on',
+      'react/react-in-jsx-scope': 'off',
       'react/prop-types': 0,
       'no-console': 'warn',
       'react-hooks/rules-of-hooks': 'error',
