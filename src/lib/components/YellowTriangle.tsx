@@ -6,8 +6,11 @@ export const YellowTriangle: React.FC = () => {
   const { welcomeBtnClicked } = React.useContext(AppContext);
 
   return (
-    <YellowTriangleWrapper appear={welcomeBtnClicked}>
-      <Triangle />
+    <YellowTriangleWrapper
+      appear={welcomeBtnClicked}
+      data-testid="yellowtrianglewrapper-utest"
+    >
+      <Triangle data-testid="triangle-utest" />
     </YellowTriangleWrapper>
   );
 };

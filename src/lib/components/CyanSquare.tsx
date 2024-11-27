@@ -5,7 +5,13 @@ import { AppContext } from '../../App';
 export const CyanSquare: React.FC = (): ReactNode => {
   const { welcomeBtnClicked } = React.useContext(AppContext);
 
-  return <CyanSquareWrapper id="CyanSquare-id" appear={welcomeBtnClicked} />;
+  return (
+    <CyanSquareWrapper
+      data-testid="cyansquare-utest"
+      id="CyanSquare-id"
+      appear={welcomeBtnClicked}
+    />
+  );
 };
 
 const rotateAround = keyframes`

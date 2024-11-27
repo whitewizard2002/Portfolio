@@ -5,8 +5,11 @@ import { AppContext } from '../../App';
 export const PinkCircle: React.FC = () => {
   const { welcomeBtnClicked } = React.useContext(AppContext);
   return (
-    <PinkCircleWrapper appear={welcomeBtnClicked}>
-      <CircleContent />
+    <PinkCircleWrapper
+      appear={welcomeBtnClicked}
+      data-testid="pinkcirclewrapper-utest"
+    >
+      <CircleContent data-testid="circlecontent-utest" />
     </PinkCircleWrapper>
   );
 };
