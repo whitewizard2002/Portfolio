@@ -10,6 +10,7 @@ import { YellowTriangle } from './lib/components/YellowTriangle';
 import { PurpleHexagon } from './lib/components/PurpleHexagon';
 import { PinkCircle } from './lib/components/PinkCircle';
 import { SkillCard } from './lib/components/SkillCard';
+import { DetailCard } from './lib/components/DetailCard';
 
 export const AppContext = React.createContext<{ welcomeBtnClicked: boolean }>({
   welcomeBtnClicked: false,
@@ -18,6 +19,7 @@ export const AppContext = React.createContext<{ welcomeBtnClicked: boolean }>({
 const App: React.FC = (): ReactNode => {
   const [welcomeBtnClicked, setWelcomeBtnClicked] = React.useState(false);
   const [removeWelcomeText, setRemoveWelcomeText] = React.useState(false);
+  const [skillCardActive, setSkillCardActive] = React.useState(-1);
   const handleWelcomeBtnClick = () => {
     setWelcomeBtnClicked(true);
   };
@@ -54,9 +56,41 @@ const App: React.FC = (): ReactNode => {
 
             {welcomeBtnClicked && (
               <SkillCardArray>
-                <SkillCard type="Languages" />
-                <SkillCard type="Databases" />
-                <SkillCard type="Tech" />
+                <SkillCard
+                  type="Languages"
+                  onHover={() => {
+                    console.log('setSkillCard(0)');
+                    setSkillCardActive(0);
+                  }}
+                  onHoverLeave={() => {
+                    setSkillCardActive(-1);
+                  }}
+                />
+                <SkillCard
+                  type="Databases"
+                  onHover={() => {
+                    console.log('setSkillCard(1)');
+
+                    setSkillCardActive(1);
+                  }}
+                  onHoverLeave={() => {
+                    setSkillCardActive(-1);
+                  }}
+                />
+                <SkillCard
+                  type="Tech"
+                  onHover={() => {
+                    console.log('setSkillCard(2)');
+
+                    setSkillCardActive(2);
+                  }}
+                  onHoverLeave={() => {
+                    setSkillCardActive(-1);
+                  }}
+                />
+                {skillCardActive === 0 && <DetailCard type={0} />}
+                {skillCardActive === 1 && <DetailCard type={1} />}
+                {skillCardActive === 2 && <DetailCard type={2} />}
               </SkillCardArray>
             )}
 

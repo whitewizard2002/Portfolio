@@ -3,6 +3,8 @@ import React from 'react';
 import { SkillCircle } from './SkillCircle';
 interface SkillCardProps {
   type: 'Languages' | 'Databases' | 'Tech';
+  onHover: () => void;
+  onHoverLeave: () => void;
 }
 
 export const SkillCard: React.FC<SkillCardProps> = (props) => {
@@ -18,7 +20,10 @@ export const SkillCard: React.FC<SkillCardProps> = (props) => {
   ];
 
   return (
-    <SkillCardWrapper>
+    <SkillCardWrapper
+      onMouseEnter={props.onHover}
+      onMouseLeave={props.onHoverLeave}
+    >
       <OuterBg id="OuterBg-id">
         <FrontContent id="FrontConent-id">
           {props.type === 'Languages' && <Image path="" />}
