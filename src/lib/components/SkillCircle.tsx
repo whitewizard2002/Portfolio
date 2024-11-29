@@ -8,14 +8,13 @@ interface SkillCircleProps {
 export const SkillCircle: React.FC<SkillCircleProps> = () => {
   return (
     <Wrapper>
-      <Image />
+      <Icon />
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div``;
-const Image = styled.div`
-  background-color: ${(props) => props.theme.white};
+const Wrapper = styled.div`
   width: 100px;
   height: 100px;
 `;
+const Icon = styled.svg``;

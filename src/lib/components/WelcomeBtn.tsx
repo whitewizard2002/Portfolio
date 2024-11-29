@@ -6,6 +6,7 @@ import { AppContext } from '../../App';
 interface WelcomeBtnProps {
   text: string;
   onClick: () => void;
+  handleShowSkillCard: () => void;
 }
 
 export const WelcomeBtn: React.FC<WelcomeBtnProps> = (props) => {
@@ -25,6 +26,7 @@ export const WelcomeBtn: React.FC<WelcomeBtnProps> = (props) => {
       data-testid="welcomebtn-test"
       onClick={showResume}
       btnClicked={welcomeBtnClicked}
+      onAnimationEnd={props.handleShowSkillCard}
     >
       <TextWrapper
         btnClicked={welcomeBtnClicked}

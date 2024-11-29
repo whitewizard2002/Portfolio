@@ -20,13 +20,27 @@ const App: React.FC = (): ReactNode => {
   const [welcomeBtnClicked, setWelcomeBtnClicked] = React.useState(false);
   const [removeWelcomeText, setRemoveWelcomeText] = React.useState(false);
   const [skillCardActive, setSkillCardActive] = React.useState(-1);
+  const [showSkillCard, setShowSkillCard] = React.useState(false);
+
   const handleWelcomeBtnClick = () => {
     setWelcomeBtnClicked(true);
   };
 
-  const removeWelcomeTxt = () => {
+  const handleShowSkillCard = React.useCallback(() => {
+    setShowSkillCard(true);
+  }, []);
+
+  const handleRemoveWelcomeTxt = () => {
     setRemoveWelcomeText(true);
   };
+
+  const handleSkillCardOnHover = React.useCallback((active: number) => {
+    setSkillCardActive(active);
+  }, []);
+
+  const handleSkillCardOnHoverLeave = React.useCallback(() => {
+    setSkillCardActive(-1);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -36,7 +50,7 @@ const App: React.FC = (): ReactNode => {
             {!removeWelcomeText && (
               <WelcomeTxtWrapper
                 btnClicked={welcomeBtnClicked}
-                onAnimationEnd={removeWelcomeTxt}
+                onAnimationEnd={handleRemoveWelcomeTxt}
               >
                 <TextTyper
                   text="Welcome"
@@ -51,20 +65,18 @@ const App: React.FC = (): ReactNode => {
               <WelcomeBtn
                 text="Know about me"
                 onClick={handleWelcomeBtnClick}
+                handleShowSkillCard={handleShowSkillCard}
               />
             </WelcomeBtnWrapper>
 
-            {welcomeBtnClicked && (
+            {welcomeBtnClicked && removeWelcomeText && (
               <SkillCardArray>
                 <SkillCard
                   type="Languages"
                   onHover={() => {
-                    console.log('setSkillCard(0)');
-                    setSkillCardActive(0);
+                    return handleSkillCardOnHover(0);
                   }}
-                  onHoverLeave={() => {
-                    setSkillCardActive(-1);
-                  }}
+                  onHoverLeave={handleSkillCardOnHoverLeave}
                 />
                 <SkillCard
                   type="Databases"

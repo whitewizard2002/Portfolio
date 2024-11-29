@@ -3,7 +3,7 @@ import React from 'react';
 import { SkillCircle } from './SkillCircle';
 interface SkillCardProps {
   type: 'Languages' | 'Databases' | 'Tech';
-  onHover: () => void;
+  onHover: (active: number) => void;
   onHoverLeave: () => void;
 }
 
