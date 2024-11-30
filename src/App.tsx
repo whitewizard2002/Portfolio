@@ -47,20 +47,18 @@ const App: React.FC = (): ReactNode => {
       <AppContext.Provider value={{ welcomeBtnClicked }}>
         <AppWrapper>
           <Column>
-            {!removeWelcomeText && (
-              <WelcomeTxtWrapper
-                btnClicked={welcomeBtnClicked}
-                onAnimationEnd={handleRemoveWelcomeTxt}
-              >
-                <TextTyper
-                  text="Welcome"
-                  weight="bold"
-                  size="150px"
-                  color="#ffffff"
-                  style={{ textShadow: '0px 0px 5px 2px rgba(255,255,255,1)' }}
-                />
-              </WelcomeTxtWrapper>
-            )}
+            <WelcomeTxtWrapper
+              btnClicked={welcomeBtnClicked}
+              onAnimationEnd={handleRemoveWelcomeTxt}
+            >
+              <TextTyper
+                text="Welcome"
+                weight="bold"
+                size="150px"
+                color="#ffffff"
+                style={{ textShadow: '0px 0px 5px 2px rgba(255,255,255,1)' }}
+              />
+            </WelcomeTxtWrapper>
             <WelcomeBtnWrapper>
               <WelcomeBtn
                 text="Know about me"
@@ -141,7 +139,7 @@ const WelcomeTxtWrapper = styled.div<{ btnClicked: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  position: absolute;
   ${(props) =>
     props.btnClicked &&
     css`
@@ -151,6 +149,7 @@ const WelcomeTxtWrapper = styled.div<{ btnClicked: boolean }>`
 
 const WelcomeBtnWrapper = styled.div`
   display: flex;
+  margin-top: 400px;
 `;
 
 const SkillCardArray = styled.div`

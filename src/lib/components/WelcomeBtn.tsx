@@ -32,14 +32,12 @@ export const WelcomeBtn: React.FC<WelcomeBtnProps> = (props) => {
         btnClicked={welcomeBtnClicked}
         onAnimationEnd={handleTextAnimationEnd}
       >
-        {showText && (
-          <TextTyper
-            size="25px"
-            weight="bold"
-            text={props.text}
-            color="#ffffff"
-          />
-        )}
+        <TextTyper
+          size="25px"
+          weight="bold"
+          text={props.text}
+          color="#ffffff"
+        />
       </TextWrapper>
     </BtnWrapper>
   );
@@ -65,16 +63,10 @@ const convertToProfileIcon = keyframes`
     height: 115px;
   }
 
-  50%{
-    width: 120px;
-    height: 115px;
-    transform: translateY(-435%);
-  }
-
   100%{
     width: 120px;
     height: 115px;
-    transform: translateY(-435%);
+    transform: translateY(-250px);
   }
 `;
 
@@ -98,7 +90,7 @@ const BtnWrapper = styled.button<{ btnClicked: boolean }>`
   ${(props) =>
     props.btnClicked &&
     css`
-      animation: ${convertToProfileIcon} 4s ease-in-out forwards;
+      animation: ${convertToProfileIcon} 3s ease-in-out forwards;
     `}
 
   &:hover {
