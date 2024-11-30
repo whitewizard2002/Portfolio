@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import CIcon from '../../../static/C';
-
+import TypeScriptIcon from '../../../static/Typescript';
 interface SkillCircleProps {
   text: string;
 }
@@ -9,7 +8,7 @@ interface SkillCircleProps {
 export const SkillCircle: React.FC<SkillCircleProps> = () => {
   return (
     <Wrapper>
-      <CIcon />
+      <TypeScriptIcon />
     </Wrapper>
   );
 };

@@ -8,8 +8,8 @@ interface SkillCardProps {
 }
 
 export const SkillCard: React.FC<SkillCardProps> = (props) => {
-  const languages = ['Java', 'Python', 'JavaScript', 'Typescript', 'R'];
-  const databases = ['MySQL', 'PostgreSQL', 'MongoDB', 'Oracle', 'GraphDB'];
+  const languages = ['Java', 'Python', 'JavaScript', 'Typescript'];
+  const databases = ['MySQL', 'PostgreSQL', 'MongoDB', 'Oracle'];
   const technologies = [
     'Git',
     'Github',
