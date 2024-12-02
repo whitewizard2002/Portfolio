@@ -6,4 +6,5 @@ export const theme = {
   cyan: '#2cccc3',
   purple: '#5626C4',
   pink: '#E60576',
+  red: '#FF0000',
 };

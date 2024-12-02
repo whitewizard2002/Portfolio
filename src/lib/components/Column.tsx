@@ -16,4 +16,5 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 10px;
   height: 100vh;
+  width: 100%;
 `;

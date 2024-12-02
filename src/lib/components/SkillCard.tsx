@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import React from 'react';
 import { SkillCircle } from './SkillCircle';
+import CodeSnippetIcon from '../../../static/CodeSnippet';
+import DatabaseIcon from '../../../static/Database';
+import MonitorSettingsIcon from '../../../static/MonitorSettings';
+
 interface SkillCardProps {
   type: 'Languages' | 'Databases' | 'Tech';
   onHover: (active: number) => void;
@@ -26,9 +30,9 @@ export const SkillCard: React.FC<SkillCardProps> = (props) => {
     >
       <OuterBg id="OuterBg-id">
         <FrontContent id="FrontConent-id">
-          {props.type === 'Languages' && <Image path="" />}
-          {props.type === 'Databases' && <Image path="" />}
-          {props.type === 'Tech' && <Image path="" />}
+          {props.type === 'Languages' && <CodeSnippetIcon />}
+          {props.type === 'Databases' && <DatabaseIcon />}
+          {props.type === 'Tech' && <MonitorSettingsIcon />}
         </FrontContent>
 
         <BackContent id="BackContent-id">
@@ -76,7 +80,7 @@ const OuterBg = styled.div`
   padding: 5px;
   position: relative;
   background: ${(props) =>
-    `conic-gradient(${props.theme.yellow},${props.theme.cyan},${props.theme.purple},${props.theme.pink})`};
+    `conic-gradient(${props.theme.yellow},${props.theme.cyan},${props.theme.purple},${props.theme.pink},${props.theme.yellow})`};
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   display: flex;
@@ -87,6 +91,7 @@ const OuterBg = styled.div`
     transform: rotateY(180deg);
   }
   transform-style: preserve-3d;
+  box-shadow: ${(props) => `0px 0px 5px 1px ${props.theme.red}`};
 `;
 
 const FrontContent = styled.div`

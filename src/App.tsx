@@ -35,10 +35,12 @@ const App: React.FC = (): ReactNode => {
   };
 
   const handleSkillCardOnHover = React.useCallback((active: number) => {
+    console.log('handleSkillCardOnHover', active);
     setSkillCardActive(active);
   }, []);
 
   const handleSkillCardOnHoverLeave = React.useCallback(() => {
+    console.log('handleSkillCardOnHoverLeave');
     setSkillCardActive(-1);
   }, []);
 
@@ -79,24 +81,16 @@ const App: React.FC = (): ReactNode => {
                 <SkillCard
                   type="Databases"
                   onHover={() => {
-                    console.log('setSkillCard(1)');
-
-                    setSkillCardActive(1);
+                    return handleSkillCardOnHover(1);
                   }}
-                  onHoverLeave={() => {
-                    setSkillCardActive(-1);
-                  }}
+                  onHoverLeave={handleSkillCardOnHoverLeave}
                 />
                 <SkillCard
                   type="Tech"
                   onHover={() => {
-                    console.log('setSkillCard(2)');
-
-                    setSkillCardActive(2);
+                    return handleSkillCardOnHover(2);
                   }}
-                  onHoverLeave={() => {
-                    setSkillCardActive(-1);
-                  }}
+                  onHoverLeave={handleSkillCardOnHoverLeave}
                 />
                 {skillCardActive === 0 && <DetailCard type={0} />}
                 {skillCardActive === 1 && <DetailCard type={1} />}
@@ -118,11 +112,13 @@ const App: React.FC = (): ReactNode => {
 };
 
 const AppWrapper = styled.div`
-  display: 'flex';
-  height: 100%;
+  display: flex;
   background: ${(props) =>
     `linear-gradient(to bottom, ${props.theme.black}, ${props.theme.light_black})`};
   width: 100%;
+  height: auto;
+  align-items: center;
+  justify-content: center;
   /* overflow-y: clip; */
   /* overflow-x: clip; */
 `;
