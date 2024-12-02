@@ -74,12 +74,8 @@ const BtnWrapper = styled.button<{ btnClicked: boolean }>`
   display: flex;
   color: white;
   border: 5px solid transparent;
-  background-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.85),
-      rgba(0, 0, 0, 0.85)
-    ),
-    linear-gradient(45deg, #2cccc3, #facd3d, #5626c4, #e60576);
+  background-image: ${(props) =>
+    `linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,1)), conic-gradient( ${props.theme.cyan},${props.theme.yellow},${props.theme.purple},${props.theme.pink}, ${props.theme.cyan})`};
   background-origin: border-box;
   background-clip: padding-box, border-box;
   padding: 1em 2em;
