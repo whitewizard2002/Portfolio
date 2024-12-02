@@ -6,6 +6,7 @@ import { AppContext } from '../../App';
 interface WelcomeBtnProps {
   text: string;
   onClick: () => void;
+  handleShowSkillCard: () => void;
 }
 
 export const WelcomeBtn: React.FC<WelcomeBtnProps> = (props) => {
@@ -25,19 +26,18 @@ export const WelcomeBtn: React.FC<WelcomeBtnProps> = (props) => {
       data-testid="welcomebtn-test"
       onClick={showResume}
       btnClicked={welcomeBtnClicked}
+      onAnimationEnd={props.handleShowSkillCard}
     >
       <TextWrapper
         btnClicked={welcomeBtnClicked}
         onAnimationEnd={handleTextAnimationEnd}
       >
-        {showText && (
-          <TextTyper
-            size="25px"
-            weight="bold"
-            text={props.text}
-            color="#ffffff"
-          />
-        )}
+        <TextTyper
+          size="25px"
+          weight="bold"
+          text={props.text}
+          color="#ffffff"
+        />
       </TextWrapper>
     </BtnWrapper>
   );
@@ -63,16 +63,10 @@ const convertToProfileIcon = keyframes`
     height: 115px;
   }
 
-  50%{
-    width: 120px;
-    height: 115px;
-    transform: translateY(-435%);
-  }
-
   100%{
     width: 120px;
     height: 115px;
-    transform: translateY(-435%);
+    transform: translateY(-250px);
   }
 `;
 
@@ -80,12 +74,8 @@ const BtnWrapper = styled.button<{ btnClicked: boolean }>`
   display: flex;
   color: white;
   border: 5px solid transparent;
-  background-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.85),
-      rgba(0, 0, 0, 0.85)
-    ),
-    linear-gradient(45deg, #2cccc3, #facd3d, #5626c4, #e60576);
+  background-image: ${(props) =>
+    `linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,1)), conic-gradient( ${props.theme.cyan},${props.theme.yellow},${props.theme.purple},${props.theme.pink}, ${props.theme.cyan})`};
   background-origin: border-box;
   background-clip: padding-box, border-box;
   padding: 1em 2em;
@@ -96,7 +86,7 @@ const BtnWrapper = styled.button<{ btnClicked: boolean }>`
   ${(props) =>
     props.btnClicked &&
     css`
-      animation: ${convertToProfileIcon} 4s ease-in-out forwards;
+      animation: ${convertToProfileIcon} 3s ease-in-out forwards;
     `}
 
   &:hover {

@@ -34,7 +34,6 @@ export const FloatingCircles: React.FC<FloatingCirclesProps> = (props) => {
       {/* Render all circles */}
       {circlesArr.map((circle, index) => (
         <Circle
-          color="#E1E2E2"
           key={index}
           size={circle.size}
           opacity={circle.opacity}

@@ -10,6 +10,7 @@ import { YellowTriangle } from './lib/components/YellowTriangle';
 import { PurpleHexagon } from './lib/components/PurpleHexagon';
 import { PinkCircle } from './lib/components/PinkCircle';
 import { SkillCard } from './lib/components/SkillCard';
+import { DetailCard } from './lib/components/DetailCard';
 
 export const AppContext = React.createContext<{ welcomeBtnClicked: boolean }>({
   welcomeBtnClicked: false,
@@ -18,45 +19,82 @@ export const AppContext = React.createContext<{ welcomeBtnClicked: boolean }>({
 const App: React.FC = (): ReactNode => {
   const [welcomeBtnClicked, setWelcomeBtnClicked] = React.useState(false);
   const [removeWelcomeText, setRemoveWelcomeText] = React.useState(false);
+  const [skillCardActive, setSkillCardActive] = React.useState(-1);
+  const [showSkillCard, setShowSkillCard] = React.useState(false);
+
   const handleWelcomeBtnClick = () => {
     setWelcomeBtnClicked(true);
   };
 
-  const removeWelcomeTxt = () => {
+  const handleShowSkillCard = React.useCallback(() => {
+    setShowSkillCard(true);
+  }, []);
+
+  const handleRemoveWelcomeTxt = () => {
     setRemoveWelcomeText(true);
   };
+
+  const handleSkillCardOnHover = React.useCallback((active: number) => {
+    console.log('handleSkillCardOnHover', active);
+    setSkillCardActive(active);
+  }, []);
+
+  const handleSkillCardOnHoverLeave = React.useCallback(() => {
+    console.log('handleSkillCardOnHoverLeave');
+    setSkillCardActive(-1);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
       <AppContext.Provider value={{ welcomeBtnClicked }}>
         <AppWrapper>
           <Column>
-            {!removeWelcomeText && (
-              <WelcomeTxtWrapper
-                btnClicked={welcomeBtnClicked}
-                onAnimationEnd={removeWelcomeTxt}
-              >
-                <TextTyper
-                  text="Welcome"
-                  weight="bold"
-                  size="150px"
-                  color="#ffffff"
-                  style={{ textShadow: '0px 0px 5px 2px rgba(255,255,255,1)' }}
-                />
-              </WelcomeTxtWrapper>
-            )}
+            <WelcomeTxtWrapper
+              btnClicked={welcomeBtnClicked}
+              onAnimationEnd={handleRemoveWelcomeTxt}
+            >
+              <TextTyper
+                text="Welcome"
+                weight="bold"
+                size="150px"
+                color="#ffffff"
+                style={{ textShadow: '0px 0px 5px 2px rgba(255,255,255,1)' }}
+              />
+            </WelcomeTxtWrapper>
             <WelcomeBtnWrapper>
               <WelcomeBtn
                 text="Know about me"
                 onClick={handleWelcomeBtnClick}
+                handleShowSkillCard={handleShowSkillCard}
               />
             </WelcomeBtnWrapper>
 
-            {welcomeBtnClicked && (
+            {welcomeBtnClicked && removeWelcomeText && (
               <SkillCardArray>
-                <SkillCard type="Languages" />
-                <SkillCard type="Databases" />
-                <SkillCard type="Tech" />
+                <SkillCard
+                  type="Languages"
+                  onHover={() => {
+                    handleSkillCardOnHover(0);
+                  }}
+                  onHoverLeave={handleSkillCardOnHoverLeave}
+                />
+                <SkillCard
+                  type="Databases"
+                  onHover={() => {
+                    return handleSkillCardOnHover(1);
+                  }}
+                  onHoverLeave={handleSkillCardOnHoverLeave}
+                />
+                <SkillCard
+                  type="Tech"
+                  onHover={() => {
+                    return handleSkillCardOnHover(2);
+                  }}
+                  onHoverLeave={handleSkillCardOnHoverLeave}
+                />
+                {skillCardActive === 0 && <DetailCard type={0} />}
+                {skillCardActive === 1 && <DetailCard type={1} />}
+                {skillCardActive === 2 && <DetailCard type={2} />}
               </SkillCardArray>
             )}
 
@@ -74,11 +112,13 @@ const App: React.FC = (): ReactNode => {
 };
 
 const AppWrapper = styled.div`
-  display: 'flex';
-  height: 100%;
+  display: flex;
   background: ${(props) =>
     `linear-gradient(to bottom, ${props.theme.black}, ${props.theme.light_black})`};
   width: 100%;
+  height: auto;
+  align-items: center;
+  justify-content: center;
   /* overflow-y: clip; */
   /* overflow-x: clip; */
 `;
@@ -95,7 +135,7 @@ const WelcomeTxtWrapper = styled.div<{ btnClicked: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  position: absolute;
   ${(props) =>
     props.btnClicked &&
     css`
@@ -105,6 +145,7 @@ const WelcomeTxtWrapper = styled.div<{ btnClicked: boolean }>`
 
 const WelcomeBtnWrapper = styled.div`
   display: flex;
+  margin-top: 400px;
 `;
 
 const SkillCardArray = styled.div`

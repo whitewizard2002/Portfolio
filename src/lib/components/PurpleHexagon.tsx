@@ -4,8 +4,11 @@ import { AppContext } from '../../App';
 export const PurpleHexagon: React.FC = () => {
   const { welcomeBtnClicked } = React.useContext(AppContext);
   return (
-    <PurpleHexagonWrapper appear={welcomeBtnClicked}>
-      <Hexagon />
+    <PurpleHexagonWrapper
+      appear={welcomeBtnClicked}
+      data-testid="purplehexagonwrapper-utest"
+    >
+      <Hexagon data-testid="hexagon-utest" />
     </PurpleHexagonWrapper>
   );
 };

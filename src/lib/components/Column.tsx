@@ -2,7 +2,11 @@ import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 export const Column: React.FC<PropsWithChildren> = (props) => {
-  return <Wrapper id="Column-id">{props.children}</Wrapper>;
+  return (
+    <Wrapper id="Column-id" data-testid="column-utest">
+      {props.children}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
@@ -12,4 +16,5 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 10px;
   height: 100vh;
+  width: 100%;
 `;

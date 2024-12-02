@@ -3,7 +3,6 @@ import React from 'react';
 import { AppContext } from '../../App';
 
 interface CircleProps {
-  color: string;
   size: number;
   opacity: number;
   position: { x: number; y: number };
@@ -18,28 +17,44 @@ export const Circle: React.FC<CircleProps> = (props) => {
 
   const index = generateRandomValue(0, colors.length - 1);
 
-  React.useEffect(() => {
-    addEventListener('animationend', () => {
-      setGoUpAnimationEnded(true);
-    });
+  // React.useEffect(() => {
+  //   addEventListener(
+  //     'animationend',
+  //     (event: React.AnimationEvent<HTMLDivElement>) => {
+  //       if (event.animationName === goUpAnimation.getName())
+  //         setGoUpAnimationEnded(true);
+  //     },
+  //   );
 
-    return () => {
-      removeEventListener('animationend', () => {});
-    };
-  }, []);
+  //   return () => {
+  //     removeEventListener('animationend', () => {});
+  //   };
+  // }, []);
+
+  const handleAnimationEnd = React.useCallback(
+    (event: React.AnimationEvent<HTMLDivElement>) => {
+      if (event.animationName === goUpAnimation.getName()) {
+        setGoUpAnimationEnded(true);
+      }
+    },
+    [],
+  );
 
   return (
-    <CircleContent
-      color={colors[Math.round(index)]}
-      size={props.size}
-      opacity={props.opacity}
-      id="floating-circle"
-      position={props.position}
-      randomX={generateRandomValue()}
-      randomY={generateRandomValue()}
-      animationDuration={generateRandomValue(7, 10)}
-      doGoUpAnimation={welcomeBtnClicked}
-    />
+    !goUpAnimationEnded && (
+      <CircleContent
+        color={colors[Math.round(index)]}
+        size={props.size}
+        opacity={props.opacity}
+        position={props.position}
+        randomX={generateRandomValue()}
+        randomY={generateRandomValue()}
+        animationDuration={generateRandomValue(7, 10)}
+        doGoUpAnimation={welcomeBtnClicked}
+        data-testid="circle-utest"
+        onAnimationEnd={handleAnimationEnd}
+      />
+    )
   );
 };
 
