@@ -9,7 +9,14 @@ afterEach(() => {
 
 test('check if text is present or not in the dom', () => {
   const handleClick = jest.fn();
-  render(<WelcomeBtn text="Welcome" onClick={handleClick} />);
+  const handleShowSkillCard = jest.fn();
+  render(
+    <WelcomeBtn
+      text="Welcome"
+      onClick={handleClick}
+      handleShowSkillCard={handleShowSkillCard}
+    />,
+  );
   const element = screen.getByText('Welcome');
   expect(element).toBeTruthy();
   expect(element).toBeInTheDocument();
@@ -18,4 +25,7 @@ test('check if text is present or not in the dom', () => {
   expect(element).toHaveProperty('onclick');
   fireEvent.click(element);
   expect(handleClick).toHaveBeenCalled();
+
+  fireEvent.animationEnd(element);
+  expect(handleShowSkillCard).toHaveBeenCalled();
 });
