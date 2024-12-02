@@ -7,8 +7,24 @@ interface CircleProps {
   opacity: number;
   position: { x: number; y: number };
 }
+const goUpAnimation = (distance: number) => keyframes`
+  to{
+    transform: translateY(-${distance}px);
+  }
+`;
+
+const floatAnimation = keyframes`
+  0%, 100%{
+    transform: translateY(0) translateX(0);
+  }
+
+  50%{
+    transform: translateY(var(--randomY)) translateX(var(--randomX));
+  }
+`;
 
 export const Circle: React.FC<CircleProps> = (props) => {
+  const goUpAnimationName = goUpAnimation(0).name;
   const colors = ['#2CCCC3', '#FACD3D', '#5626C4', '#E60576'];
   const { welcomeBtnClicked } = React.useContext(AppContext);
   const [goUpAnimationEnded, setGoUpAnimationEnded] = React.useState(false);
@@ -33,11 +49,12 @@ export const Circle: React.FC<CircleProps> = (props) => {
 
   const handleAnimationEnd = React.useCallback(
     (event: React.AnimationEvent<HTMLDivElement>) => {
-      if (event.animationName === goUpAnimation.getName()) {
+      console.log(event.animationName, goUpAnimationName);
+      if (event.animationName === goUpAnimationName) {
         setGoUpAnimationEnded(true);
       }
     },
-    [],
+    [goUpAnimationName],
   );
 
   return (
@@ -57,22 +74,6 @@ export const Circle: React.FC<CircleProps> = (props) => {
     )
   );
 };
-
-const floatAnimation = keyframes`
-  0%, 100%{
-    transform: translateY(0) translateX(0);
-  }
-
-  50%{
-    transform: translateY(var(--randomY)) translateX(var(--randomX));
-  }
-`;
-
-const goUpAnimation = keyframes`
-  to{
-    top: -22px;
-  }
-`;
 
 const CircleContent = styled.div<{
   color: string;
@@ -103,6 +104,7 @@ const CircleContent = styled.div<{
   ${(props) =>
     props.doGoUpAnimation &&
     css`
-      animation: ${goUpAnimation} 2s ease-in-out forwards;
+      animation: ${goUpAnimation(props.position.y - props.size / 2 + 22)} 2s
+        ease-in-out forwards;
     `}
 `;
