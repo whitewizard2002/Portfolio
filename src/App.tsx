@@ -74,7 +74,7 @@ const App: React.FC = (): ReactNode => {
                 <SkillCard
                   type="Languages"
                   onHover={() => {
-                    return handleSkillCardOnHover(0);
+                    handleSkillCardOnHover(0);
                   }}
                   onHoverLeave={handleSkillCardOnHoverLeave}
                 />

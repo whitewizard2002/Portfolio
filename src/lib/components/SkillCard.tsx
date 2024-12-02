@@ -7,7 +7,7 @@ import MonitorSettingsIcon from '../../../static/MonitorSettings';
 
 interface SkillCardProps {
   type: 'Languages' | 'Databases' | 'Tech';
-  onHover: (active: number) => void;
+  onHover: () => void;
   onHoverLeave: () => void;
 }
 
@@ -132,12 +132,6 @@ const BackContent = styled.div`
   backface-visibility: hidden;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-`;
-
-const Image = styled.img<{ path: string }>`
-  width: 100px;
-  height: 100px;
-  background: ${(props) => props.theme.white};
 `;
 
 const SkillCircleArray = styled.div`
