@@ -23,13 +23,8 @@ const rotateAround = keyframes`
 `;
 
 const appearAnimation = keyframes`
-  0%{
-    top: -700px;
-    left: 190px;
-  }
-  100%{
+ to{
     top: -300px;
-    left: 190px;
   }
 `;
 

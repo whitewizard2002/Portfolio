@@ -15,13 +15,8 @@ export const PinkCircle: React.FC = () => {
 };
 
 const appearAnimation = keyframes`
-  0%{
-    top: -400px;
-    right: -50px;
-  }
-  100%{
-    top: -200px;
-    right: -50px;
+  to{
+    top:-200px;
   }
 `;
 
@@ -41,7 +36,7 @@ const PinkCircleWrapper = styled.div<{ appear: boolean }>`
   display: flex;
   position: absolute;
   top: -500px;
-  right: -75px;
+  right: -50px;
   ${(props) =>
     props.appear &&
     css`

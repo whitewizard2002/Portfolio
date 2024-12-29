@@ -44,6 +44,8 @@ const App: React.FC = (): ReactNode => {
     setSkillCardActive(-1);
   }, []);
 
+  const DetailCardMemoized = React.memo(DetailCard);
+
   return (
     <ThemeProvider theme={theme}>
       <AppContext.Provider value={{ welcomeBtnClicked }}>
@@ -73,9 +75,7 @@ const App: React.FC = (): ReactNode => {
               <SkillCardArray>
                 <SkillCard
                   type="Languages"
-                  onHover={() => {
-                    handleSkillCardOnHover(0);
-                  }}
+                  onHover={() => handleSkillCardOnHover(0)}
                   onHoverLeave={handleSkillCardOnHoverLeave}
                 />
                 <SkillCard
@@ -92,9 +92,9 @@ const App: React.FC = (): ReactNode => {
                   }}
                   onHoverLeave={handleSkillCardOnHoverLeave}
                 />
-                {skillCardActive === 0 && <DetailCard type={0} />}
-                {skillCardActive === 1 && <DetailCard type={1} />}
-                {skillCardActive === 2 && <DetailCard type={2} />}
+                {skillCardActive > -1 && (
+                  <DetailCardMemoized type={skillCardActive} />
+                )}
               </SkillCardArray>
             )}
 
