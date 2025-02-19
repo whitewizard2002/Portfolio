@@ -16,13 +16,8 @@ export const YellowTriangle: React.FC = () => {
 };
 
 const appearAnimation = keyframes`
-  0%{
-    top: -500px;
-    right: 190px;
-  }
-  100%{
+  to{
     top: -100px;
-    right: 190px;
   }
 `;
 
