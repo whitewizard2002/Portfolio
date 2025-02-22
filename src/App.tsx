@@ -29,6 +29,7 @@ const AppWrapper = styled.div`
   height: auto;
   align-items: center;
   justify-content: center;
+  font-family: 'Orbitron', sans-serif;
   /* overflow-y: clip; */
   /* overflow-x: clip; */
 `;
