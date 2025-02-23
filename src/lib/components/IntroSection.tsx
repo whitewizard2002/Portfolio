@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { keyframes, useTheme } from 'styled-components';
+import styled, { css, keyframes, useTheme } from 'styled-components';
 import { TextTyper } from './TextTyper';
 import introBg from '../../../static/db_bg.png';
 import DpImg from '../../../static/dp.jpeg';
@@ -10,13 +10,14 @@ interface IntroSectionProps {
 export const IntroSection: React.FC<IntroSectionProps> = (props) => {
   const name = props.name;
   const theme = useTheme();
+  const [nameAnimationEnded, setNameAnimationEnded] = React.useState(false);
   return (
     <Wrapper>
       <DpWrapper>
         <DpImage />
       </DpWrapper>
       <InfoWrapper>
-        <NameWrapper>
+        <NameWrapper onAnimationEnd={() => setNameAnimationEnded(true)}>
           <TextTyper
             text={name}
             size="45px"
@@ -25,7 +26,7 @@ export const IntroSection: React.FC<IntroSectionProps> = (props) => {
             margin="30px"
           />
         </NameWrapper>
-        <SummaryWrapper>
+        <SummaryWrapper fadeAnimate={nameAnimationEnded}>
           I am a passionate Web Developer and Machine Learning student,
           constantly exploring the intersection of frontend development and
           AI-driven solutions. With a strong foundation in React.js, JavaScript,
@@ -95,11 +96,15 @@ const NameWrapper = styled.div`
   animation: 0.75s ${leftToRight} ease-out forwards;
 `;
 
-const SummaryWrapper = styled.div`
+const SummaryWrapper = styled.div<{ fadeAnimate: boolean }>`
   font-size: 25px;
   color: ${(props) => props.theme.white};
   margin-bottom: 20px;
   position: relative;
   opacity: 0;
-  animation: 1.5s ${fadeIn} linear forwards;
+  ${(props) =>
+    props.fadeAnimate &&
+    css`
+      animation: 1.5s ${fadeIn} linear forwards;
+    `}
 `;
