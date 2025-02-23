@@ -30,6 +30,7 @@ const AppWrapper = styled.div`
   align-items: center;
   justify-content: center;
   font-family: 'Orbitron', sans-serif;
+  overflow-x: hidden;
   /* overflow-y: clip; */
   /* overflow-x: clip; */
 `;

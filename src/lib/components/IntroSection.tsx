@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { useTheme } from 'styled-components';
+import styled, { keyframes, useTheme } from 'styled-components';
 import { TextTyper } from './TextTyper';
 import introBg from '../../../static/db_bg.png';
 import DpImg from '../../../static/dp.jpeg';
@@ -15,16 +15,25 @@ export const IntroSection: React.FC<IntroSectionProps> = (props) => {
       <DpWrapper>
         <DpImage />
       </DpWrapper>
-      <NameWrapper>
-        <TextTyper
-          text={name}
-          size="45px"
-          weight="bold"
-          color={theme.white}
-          margin="30px"
-        />
-        <SummaryWrapper>Hello World!!</SummaryWrapper>
-      </NameWrapper>
+      <InfoWrapper>
+        <NameWrapper>
+          <TextTyper
+            text={name}
+            size="45px"
+            weight="bold"
+            color={theme.white}
+            margin="30px"
+          />
+        </NameWrapper>
+        <SummaryWrapper>
+          I am a passionate Web Developer and Machine Learning student,
+          constantly exploring the intersection of frontend development and
+          AI-driven solutions. With a strong foundation in React.js, JavaScript,
+          and modern web technologies, I build seamless user experiences while
+          also delving into the world of machine learning to create intelligent
+          and data-driven applications.
+        </SummaryWrapper>
+      </InfoWrapper>
     </Wrapper>
   );
 };
@@ -37,6 +46,7 @@ const Wrapper = styled.div`
   background-position: center;
   display: flex;
   flex-direction: row;
+  gap: 10px;
 `;
 
 const DpWrapper = styled.div`
@@ -44,27 +54,52 @@ const DpWrapper = styled.div`
   width: 25%;
   background-size: cover;
   background-position: center;
-  border-radius: 50%;
+  justify-content: center;
 `;
+const fadeIn = keyframes`
+  from{
+    opacity:0;
+  }to{
+    opacity:1;
+  }`;
 
 const DpImage = styled.div`
-  width: 100%;
+  width: 228px;
   height: 228px;
   background-image: url(${DpImg});
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  object-fit: cover;
   border-radius: 50%;
+  border: ${(props) => `5px solid ${props.theme.black}`};
+  animation: 1.5s ${fadeIn} ease-out forwards;
 `;
 
-const NameWrapper = styled.div`
+const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 75%;
 `;
 
+const leftToRight = keyframes`
+  from {
+    transform: translateX(100%)
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const NameWrapper = styled.div`
+  position: relative;
+  animation: 0.75s ${leftToRight} ease-out forwards;
+`;
+
 const SummaryWrapper = styled.div`
   font-size: 25px;
   color: ${(props) => props.theme.white};
+  margin-bottom: 20px;
+  position: relative;
+  opacity: 0;
+  animation: 1.5s ${fadeIn} linear forwards;
 `;
