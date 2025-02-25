@@ -13,20 +13,27 @@ export const IntroSection: React.FC<IntroSectionProps> = (props) => {
   const [nameAnimationEnded, setNameAnimationEnded] = React.useState(false);
   return (
     <Wrapper>
-      <DpWrapper>
-        <DpImage />
+      <DpWrapper data-testid="Dp-wrapper-test-id">
+        <DpImage data-testid="Dp-img-test-id" />
       </DpWrapper>
-      <InfoWrapper>
-        <NameWrapper onAnimationEnd={() => setNameAnimationEnded(true)}>
+      <InfoWrapper data-testid="Info-wrapper-test-id">
+        <NameWrapper
+          onAnimationEnd={() => setNameAnimationEnded(true)}
+          data-testid="Name-wrapper-test-id"
+        >
           <TextTyper
             text={name}
             size="45px"
             weight="bold"
             color={theme.white}
             margin="30px"
+            data-testid="Name-texttyper-test-id"
           />
         </NameWrapper>
-        <SummaryWrapper fadeAnimate={nameAnimationEnded}>
+        <SummaryWrapper
+          fadeAnimate={nameAnimationEnded}
+          data-testid="summaryWrapper-test-id"
+        >
           I am a passionate Web Developer and Machine Learning student,
           constantly exploring the intersection of frontend development and
           AI-driven solutions. With a strong foundation in React.js, JavaScript,
