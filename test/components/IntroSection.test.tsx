@@ -3,7 +3,8 @@ import { IntroSection } from '../../src/lib/components/IntroSection';
 import React from 'react';
 import 'jest-styled-components';
 import '@testing-library/jest-dom';
-
+import ThemeProvider from 'styled-components';
+import { theme } from '../../src/lib/theme/theme';
 afterEach(() => {
   cleanup();
 });
@@ -17,7 +18,11 @@ test('unit test for IntroSection.tsx', () => {
   const summary =
     'I am a passionate Web Developer and Machine Learning student,constantly exploring the intersection of frontend development and AI-driven solutions. With a strong foundation in React.js, JavaScript, and modern web technologies, I build seamless user experiences while also delving into the world of machine learning to create intelligent and data-driven applications.';
 
-  render(<IntroSection name={name} />);
+  render(
+    <ThemeProvider theme={theme}>
+      <IntroSection name={name} />
+    </ThemeProvider>,
+  );
   const element = screen.getByText(name);
   expect(element).toBeTruthy();
   expect(element.textContent).toBe(name);
