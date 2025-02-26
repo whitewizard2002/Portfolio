@@ -1,14 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
-import { SkillCircle } from './SkillCircle';
-import CodeSnippetIcon from '../../../static/CodeSnippet';
-import DatabaseIcon from '../../../static/Database';
-import MonitorSettingsIcon from '../../../static/MonitorSettings';
 
 interface SkillCardProps {
-  type: 'Languages' | 'Databases' | 'Tech';
-  onHover: (event: React.MouseEvent) => void;
-  onHoverLeave: (event: React.MouseEvent) => void;
+  type: 'LANGUAGES' | 'DATABASES' | 'TECHNOLOGY';
 }
 
 export const SkillCard: React.FC<SkillCardProps> = (props) => {
@@ -24,44 +18,25 @@ export const SkillCard: React.FC<SkillCardProps> = (props) => {
   ];
 
   return (
-    <SkillCardWrapper
-      onMouseEnter={props.onHover}
-      onMouseLeave={props.onHoverLeave}
-    >
+    <SkillCardWrapper id="SkillCardWrapper-id">
       <OuterBg id="OuterBg-id">
-        <FrontContent id="FrontConent-id">
-          {props.type === 'Languages' && <CodeSnippetIcon />}
-          {props.type === 'Databases' && <DatabaseIcon />}
-          {props.type === 'Tech' && <MonitorSettingsIcon />}
-        </FrontContent>
-
-        <BackContent id="BackContent-id">
-          {props.type === 'Languages' ? (
-            <>
-              <SkillCircleArray>
-                {languages.map((language) => {
-                  return <SkillCircle key={language} text={language} />;
-                })}
-              </SkillCircleArray>
-            </>
-          ) : props.type === 'Databases' ? (
-            <>
-              <SkillCircleArray>
-                {databases.map((database) => {
-                  return <SkillCircle key={database} text={database} />;
-                })}
-              </SkillCircleArray>
-            </>
-          ) : (
-            <>
-              <SkillCircleArray>
-                {technologies.map((technologies) => {
-                  return <SkillCircle key={technologies} text={technologies} />;
-                })}
-              </SkillCircleArray>
-            </>
-          )}
-        </BackContent>
+        <ContentWrapper id="Conent-Wrapperid">
+          <TitleWrapper>{props.type}</TitleWrapper>
+          <BtnGridWrapper>
+            {props.type == 'LANGUAGES' &&
+              languages.map((language, index) => (
+                <BtnWrapper key={index}>{language}</BtnWrapper>
+              ))}
+            {props.type == 'DATABASES' &&
+              databases.map((db, index) => (
+                <BtnWrapper key={index}>{db}</BtnWrapper>
+              ))}
+            {props.type == 'TECHNOLOGY' &&
+              technologies.map((technology, index) => (
+                <BtnWrapper key={index}>{technology}</BtnWrapper>
+              ))}
+          </BtnGridWrapper>
+        </ContentWrapper>
       </OuterBg>
     </SkillCardWrapper>
   );
@@ -77,68 +52,57 @@ const OuterBg = styled.div`
   width: 320px;
   height: 400px;
   border-radius: 5px;
-  padding: 5px;
+  background-color: ${(props) => props.theme.black_25_translucent};
   position: relative;
-  background: ${(props) =>
-    `conic-gradient(${props.theme.yellow},${props.theme.cyan},${props.theme.purple},${props.theme.pink},${props.theme.yellow})`};
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.6s;
-  &:hover {
-    transform: rotateY(180deg);
-  }
-  transform-style: preserve-3d;
-  box-shadow: ${(props) => `0px 0px 5px 1px ${props.theme.red}`};
 `;
 
-const FrontContent = styled.div`
-  background-color: ${(props) => props.theme.black};
-  border-radius: 5px;
+const ContentWrapper = styled.div`
+  border: 2px solid ${(props) => props.theme.white};
+  width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
-  width: auto;
-  height: auto;
-  backface-visibility: hidden;
-  transition: transform 0.6s;
-  ${OuterBg}:hover & {
-    transform: rotateY(180deg);
-  }
-  z-index: 2;
-  transform-style: preserve-3d;
+  color: ${(props) => props.theme.white};
 `;
 
-const BackContent = styled.div`
-  background-color: ${(props) => props.theme.black};
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
-  width: auto;
-  height: auto;
-  backface-visibility: hidden;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
+const TitleWrapper = styled.div`
+  border: 2px solid ${(props) => props.theme.white_25_translucent};
+  color: ${(props) => props.theme.white};
+  text-shadow:
+    0px 0px 20px ${(props) => props.theme.light_blue},
+    0px 0px 20px ${(props) => props.theme.light_blue},
+    0px 0px 10px ${(props) => props.theme.light_blue};
+  padding: 10px 30px;
+  font-size: 35px;
 `;
 
-const SkillCircleArray = styled.div`
+const BtnGridWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  gap: 10px;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
-  padding: 20px;
+  padding: 10px;
+`;
+
+const BtnWrapper = styled.div`
+  border: 2px solid ${(props) => props.theme.white_25_translucent};
+  padding: 10px 20px;
+  font-size: 20px;
+  text-shadow:
+    0px 0px 20px ${(props) => props.theme.light_blue},
+    0px 0px 20px ${(props) => props.theme.light_blue};
+
+  &:hover {
+    background-color: ${(props) => props.theme.white};
+    cursor: pointer;
+    color: ${(props) => props.theme.black};
+    text-shadow: none;
+  }
 `;
