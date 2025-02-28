@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import React from 'react';
 
 interface SkillCardProps {
@@ -21,7 +21,9 @@ export const SkillCard: React.FC<SkillCardProps> = (props) => {
     <SkillCardWrapper id="SkillCardWrapper-id">
       <OuterBg id="OuterBg-id">
         <ContentWrapper id="Conent-Wrapperid">
-          <TitleWrapper>{props.type}</TitleWrapper>
+          <TitleBoxWrapper>
+            <TitleWrapper>{props.type}</TitleWrapper>
+          </TitleBoxWrapper>
           <BtnGridWrapper>
             {props.type == 'LANGUAGES' &&
               languages.map((language, index) => (
@@ -42,17 +44,28 @@ export const SkillCard: React.FC<SkillCardProps> = (props) => {
   );
 };
 
+const fadeIn = keyframes`
+  from{
+    opacity: 0;
+    transform: translateY(40px);
+  }to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const SkillCardWrapper = styled.div`
   display: inline-block;
   position: relative;
   perspective: 1000px;
+  animation: ${fadeIn} 1s ease-in-out;
 `;
 
 const OuterBg = styled.div`
   width: 320px;
   height: 400px;
   border-radius: 5px;
-  background-color: ${(props) => props.theme.black_25_translucent};
+  background-color: ${(props) => props.theme.black_75_translucent};
   position: relative;
   display: flex;
   justify-content: center;
@@ -71,6 +84,13 @@ const ContentWrapper = styled.div`
   color: ${(props) => props.theme.white};
 `;
 
+const TitleBoxWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 20px;
+`;
+
 const TitleWrapper = styled.div`
   border: 2px solid ${(props) => props.theme.white_25_translucent};
   color: ${(props) => props.theme.white};
@@ -79,7 +99,7 @@ const TitleWrapper = styled.div`
     0px 0px 20px ${(props) => props.theme.light_blue},
     0px 0px 10px ${(props) => props.theme.light_blue};
   padding: 10px 30px;
-  font-size: 35px;
+  font-size: 30px;
 `;
 
 const BtnGridWrapper = styled.div`
