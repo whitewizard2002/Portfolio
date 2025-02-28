@@ -79,7 +79,7 @@ const DpImage = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 50%;
-  border: ${(props) => `5px solid ${props.theme.black}`};
+  border: ${(props) => `5px solid ${props.theme.white}`};
   animation: 1.5s ${fadeIn} ease-out forwards;
 `;
 
