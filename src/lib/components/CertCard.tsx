@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TextTyper } from './TextTyper';
 
 interface CertCardProps {
-  title: string;
   image_url: string;
   img_alt: string;
   verification_url: string;
@@ -11,25 +9,36 @@ interface CertCardProps {
   expires_at: string;
 }
 
+interface VerifyBtnProps {
+  url: string;
+}
+
+const VerifyBtn: React.FC<VerifyBtnProps> = ({ url }) => {
+  const handleRedirect = () => {
+    if (url) {
+      window.open(url, '_blank'); // Open the URL in a new tab
+    } else {
+      alert('Invalid URL');
+    }
+  };
+  return <VerifyBtnWrapper onClick={handleRedirect}>Verify</VerifyBtnWrapper>;
+};
+
 export const CertCard: React.FC<CertCardProps> = (props) => {
   return (
     <Wrapper>
       <CertImg src={props.image_url} alt={props.img_alt} />
-      <TextTyper text={props.title} size="30px" weight="bold" color="#ffffff" />
-      <VerifyBtn
-        onClick={() => {
-          console.log('Verification Button clicked');
-        }}
-      >
-        Verify
-      </VerifyBtn>
+      <DateWrapper>
+        {props.issued_at} - {props.expires_at}
+      </DateWrapper>
+      <VerifyBtn url={props.verification_url} />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   display: flex;
-  background-color: #f2f2f2;
+  background-color: ${(props) => props.theme.black_75_translucent};
   padding: 20px;
   border-radius: 5px;
   border: ${(props) => props.theme.white};
@@ -44,10 +53,31 @@ const CertImg = styled.img`
   height: auto;
 `;
 
-const VerifyBtn = styled.button`
-  background: ${(props) =>
-    props.theme.red}; // should be using the solo leveling themed button
-  border: ${(props) => props.theme.white};
+const DateWrapper = styled.div`
+  display: flex;
   color: ${(props) => props.theme.white};
-  padding: 10px 20px;
+  font-size: 20px;
+  margin: 20px 0px;
+  text-shadow:
+    0px 0px 20px ${(props) => props.theme.light_blue},
+    0px 0px 20px ${(props) => props.theme.light_blue},
+    0px 0px 10px ${(props) => props.theme.light_blue};
+`;
+
+const VerifyBtnWrapper = styled.button`
+  background: ${(props) => props.theme.black_75_translucent};
+  border: 2px solid ${(props) => props.theme.white};
+  color: ${(props) => props.theme.white};
+  padding: 10px 30px;
+  font-size: 20px;
+  text-shadow:
+    0px 0px 20px ${(props) => props.theme.light_blue},
+    0px 0px 20px ${(props) => props.theme.light_blue},
+    0px 0px 10px ${(props) => props.theme.light_blue};
+  &:hover {
+    background: ${(props) => props.theme.white};
+    color: ${(props) => props.theme.black};
+    cursor: pointer;
+    text-shadow: none;
+  }
 `;

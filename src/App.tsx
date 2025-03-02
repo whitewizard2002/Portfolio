@@ -20,7 +20,7 @@ const App: React.FC = (): ReactNode => {
 const AppWrapper = styled.div`
   display: flex;
   background: ${(props) =>
-    `linear-gradient(to bottom, ${props.theme.black}, ${props.theme.light_black})`};
+    `linear-gradient(to bottom, ${props.theme.black}, ${props.theme.darkest_blue})`};
   width: 100%;
   height: auto;
   align-items: center;
