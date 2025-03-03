@@ -1,7 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 interface CertCardProps {
+  activeKey: number;
+  optionKey: number;
   image_url: string;
   img_alt: string;
   verification_url: string;
@@ -26,7 +28,7 @@ const VerifyBtn: React.FC<VerifyBtnProps> = ({ url }) => {
 
 export const CertCard: React.FC<CertCardProps> = (props) => {
   return (
-    <Wrapper>
+    <Wrapper optionKey={props.optionKey} activeKey={props.activeKey}>
       <CertImg src={props.image_url} alt={props.img_alt} />
       <DateWrapper>
         {props.issued_at} - {props.expires_at}
@@ -36,7 +38,23 @@ export const CertCard: React.FC<CertCardProps> = (props) => {
   );
 };
 
-const Wrapper = styled.div`
+const goUp = keyframes`
+  from{
+    transform: translateY(0px);
+  }to{
+    transform: translateY(-100%);
+  }
+`;
+
+const goDown = keyframes`
+  from{
+    transform: translateY(-100%);
+  }to{
+    transform: translateY(0px);
+  }
+`;
+
+const Wrapper = styled.div<{ optionKey: number; activeKey: number }>`
   display: flex;
   background-color: ${(props) => props.theme.black_75_translucent};
   padding: 20px;
@@ -45,6 +63,15 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 300px;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  ${({ optionKey, activeKey }) => css`
+    animation: 0.5s ${optionKey === activeKey ? goDown : goUp} ease-out forwards;
+    opacity: ${optionKey === activeKey ? 1 : 0};
+    transition: opacity 0.5s ease-out;
+  `}
 `;
 
 const CertImg = styled.img`

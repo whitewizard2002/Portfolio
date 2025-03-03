@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { CertCard } from './CertCard';
 import AIPractitionerImg from '../../../static/aws-certified-ai-practitioner.png';
 import CCPractitionerImg from '../../../static/aws-certified-cloud-practitioner.png';
@@ -36,33 +36,53 @@ export const CertSection: React.FC = () => {
       expires_at: 'Jan 2028',
     },
   ];
+  const [activeKey, setActiveKey] = React.useState(0);
+
+  const handleCertSelection = React.useCallback((key: number) => {
+    setActiveKey(key);
+  }, []);
+
+  React.useEffect(() => {}, [activeKey]);
 
   return (
     <Wrapper>
-      <OptionGridWrapper>
-        <OptionGrid>
-          {certArr.map((content, key) => {
-            return (
-              <CertOptionWrapper key={key}>
-                <CertOption key={key}>{content}</CertOption>
-              </CertOptionWrapper>
-            );
-          })}
-        </OptionGrid>
-      </OptionGridWrapper>
-      <Divider />
-      {image_url_arr.map((content, key) => {
-        return (
-          <CertCard
-            key={key}
-            image_url={content.image_url}
-            img_alt={content.img_alt}
-            verification_url={content.verification_url}
-            issued_at={content.issued_at}
-            expires_at={content.expires_at}
-          />
-        );
-      })}
+      <ContentWrapper>
+        <OptionGridWrapper>
+          <OptionGrid>
+            {certArr.map((content, key) => {
+              return (
+                <CertOptionWrapper
+                  isActive={activeKey}
+                  optionKey={key}
+                  key={key}
+                  onClick={() => handleCertSelection(key)}
+                >
+                  <CertOption key={key}>{content}</CertOption>
+                </CertOptionWrapper>
+              );
+            })}
+          </OptionGrid>
+        </OptionGridWrapper>
+        <Divider />
+        <CertCardAreaWrapper id="CertCardAreaWrapper">
+          <CertCardWrapper id="CertCardWrapper">
+            {image_url_arr.map((content, key) => {
+              return (
+                <CertCard
+                  key={key}
+                  optionKey={key}
+                  activeKey={activeKey}
+                  image_url={content.image_url}
+                  img_alt={content.img_alt}
+                  verification_url={content.verification_url}
+                  issued_at={content.issued_at}
+                  expires_at={content.expires_at}
+                />
+              );
+            })}
+          </CertCardWrapper>
+        </CertCardAreaWrapper>
+      </ContentWrapper>
     </Wrapper>
   );
 };
@@ -76,6 +96,12 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const OptionGridWrapper = styled.div`
@@ -93,10 +119,11 @@ const OptionGrid = styled.ul`
   padding: 0px;
 `;
 
-const CertOptionWrapper = styled.div`
+const CertOptionWrapper = styled.div<{ isActive: number; optionKey: number }>`
   display: flex;
   padding: 10px;
   background-color: ${(props) => props.theme.black_75_translucent};
+  transition: background-color 0.15s;
   text-align: center;
   font-size: 20px;
   color: ${(props) => props.theme.white};
@@ -105,14 +132,23 @@ const CertOptionWrapper = styled.div`
     0px 0px 20px ${(props) => props.theme.light_blue},
     0px 0px 20px ${(props) => props.theme.light_blue},
     0px 0px 10px ${(props) => props.theme.light_blue};
-  &:hover,
-  &:active {
-    background-color: ${(props) => props.theme.white};
+  &:hover {
+    background-color: ${(props) => props.theme.white_75_translucent};
     color: ${(props) => props.theme.black};
     border-right: 5px solid ${(props) => props.theme.darker_blue};
     cursor: pointer;
     text-shadow: none;
   }
+
+  ${(props) =>
+    props.isActive == props.optionKey &&
+    css`
+      background-color: ${(props) => props.theme.white};
+      color: ${(props) => props.theme.black};
+      border-right: 5px solid ${(props) => props.theme.darker_blue};
+      cursor: pointer;
+      text-shadow: none;
+    `}
 `;
 
 const CertOption = styled.li`
@@ -124,4 +160,16 @@ const Divider = styled.div`
   width: 2px;
   border-left: 1px solid ${(props) => props.theme.white};
   align-self: stretch;
+`;
+
+const CertCardAreaWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+`;
+
+const CertCardWrapper = styled.div`
+  position: relative;
+  width: 340px;
+  height: 448px;
 `;
