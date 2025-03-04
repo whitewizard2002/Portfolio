@@ -140,7 +140,7 @@ const CertOptionWrapper = styled.div<{ isActive: number; optionKey: number }>`
   text-align: center;
   font-size: 20px;
   color: ${(props) => props.theme.white};
-  border-right: 5px solid ${(props) => props.theme.black_75_translucent};
+  border-right: 10px solid ${(props) => props.theme.black_75_translucent};
   text-shadow:
     0px 0px 20px ${(props) => props.theme.light_blue},
     0px 0px 20px ${(props) => props.theme.light_blue},
@@ -148,7 +148,7 @@ const CertOptionWrapper = styled.div<{ isActive: number; optionKey: number }>`
   &:hover {
     background-color: ${(props) => props.theme.white_75_translucent};
     color: ${(props) => props.theme.black};
-    border-right: 5px solid ${(props) => props.theme.darker_blue};
+    border-right: 10px solid ${(props) => props.theme.darker_blue};
     cursor: pointer;
     text-shadow: none;
   }
@@ -158,7 +158,7 @@ const CertOptionWrapper = styled.div<{ isActive: number; optionKey: number }>`
     css`
       background-color: ${(props) => props.theme.white};
       color: ${(props) => props.theme.black};
-      border-right: 5px solid ${(props) => props.theme.darker_blue};
+      border-right: 10px solid ${(props) => props.theme.darker_blue};
       cursor: pointer;
       text-shadow: none;
     `}
@@ -184,6 +184,6 @@ const CertCardAreaWrapper = styled.div`
 
 const CertCardWrapper = styled.div`
   position: relative;
-  width: 340px;
+  width: 680px;
   height: 448px;
 `;

@@ -65,10 +65,12 @@ const Wrapper = styled.div<{ optionKey: number; activeKey: number }>`
   flex-direction: column;
   align-items: center;
   width: 300px;
+  height: 408px;
 
   position: absolute;
-  top: 0px;
-  left: 0px;
+  left: 25%;
+  /* transform: translate(-50%, -50%); */
+
   ${({ optionKey, activeKey }) => css`
     animation: 0.5s ${optionKey === activeKey ? goDown : goUp} ease-out forwards;
     opacity: ${optionKey === activeKey ? 1 : 0};
