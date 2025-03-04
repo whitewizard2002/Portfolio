@@ -100,12 +100,12 @@ export const CertSection: React.FC = () => {
 const Wrapper = styled.div`
   background: ${(props) =>
     `linear-gradient(to bottom, ${props.theme.black},${props.theme.darkest_blue})`};
-  padding: 20px;
-  width: 100%;
+  padding: 2em;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 1em;
 `;
 
 const ContentWrapper = styled.div`
@@ -113,23 +113,25 @@ const ContentWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.theme.black_75_translucent};
-  border-radius: 5px;
-  gap: 0px, 10px;
+  border-radius: 0.5em;
+  gap: 0px;
+  width: 100%;
+  max-width: 75%;
 `;
 
 const OptionGridWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   background-color: transparent;
   align-self: stretch;
   justify-content: space-around;
+  flex-grow: 1;
 `;
 
 const OptionGrid = styled.ul`
   list-style-type: none;
-  margin: 0px;
-  padding: 0px;
+  padding: 0em;
+  margin: 0em;
 `;
 
 const CertOptionWrapper = styled.div<{ isActive: number; optionKey: number }>`
@@ -138,17 +140,17 @@ const CertOptionWrapper = styled.div<{ isActive: number; optionKey: number }>`
   background-color: transparent;
   transition: background-color 0.15s;
   text-align: center;
-  font-size: 20px;
+  font-size: 1.5em;
   color: ${(props) => props.theme.white};
-  border-right: 10px solid ${(props) => props.theme.black_75_translucent};
+  border-right: 0.36em solid ${(props) => props.theme.black_75_translucent};
   text-shadow:
-    0px 0px 20px ${(props) => props.theme.light_blue},
-    0px 0px 20px ${(props) => props.theme.light_blue},
-    0px 0px 10px ${(props) => props.theme.light_blue};
+    0rem 0rem 2rem ${(props) => props.theme.light_blue},
+    0rem 0rem 2rem ${(props) => props.theme.light_blue},
+    0rem 0rem 1rem ${(props) => props.theme.light_blue};
   &:hover {
     background-color: ${(props) => props.theme.white_75_translucent};
     color: ${(props) => props.theme.black};
-    border-right: 10px solid ${(props) => props.theme.darker_blue};
+    border-right: 0.5rem solid ${(props) => props.theme.darker_blue};
     cursor: pointer;
     text-shadow: none;
   }
@@ -158,7 +160,7 @@ const CertOptionWrapper = styled.div<{ isActive: number; optionKey: number }>`
     css`
       background-color: ${(props) => props.theme.white};
       color: ${(props) => props.theme.black};
-      border-right: 10px solid ${(props) => props.theme.darker_blue};
+      border-right: 0.5rem solid ${(props) => props.theme.darker_blue};
       cursor: pointer;
       text-shadow: none;
     `}
@@ -180,10 +182,11 @@ const CertCardAreaWrapper = styled.div`
   justify-content: space-around;
   position: relative;
   overflow-y: hidden;
+  width: 100%;
 `;
 
 const CertCardWrapper = styled.div`
   position: relative;
-  width: 680px;
+  width: 100%;
   height: 448px;
 `;

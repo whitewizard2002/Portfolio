@@ -80,8 +80,8 @@ const Wrapper = styled.div<{ optionKey: number; activeKey: number }>`
 
 const ImgWrapper = styled.div`
   display: flex;
-  height: 300px;
-  width: 300px;
+  max-width: 100%;
+  height: auto;
 `;
 
 const CertImg = styled.img`
