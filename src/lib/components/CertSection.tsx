@@ -3,6 +3,7 @@ import styled, { css, keyframes } from 'styled-components';
 import { CertCard } from './CertCard';
 import AIPractitionerImg from '../../../static/aws-certified-ai-practitioner.png';
 import CCPractitionerImg from '../../../static/aws-certified-cloud-practitioner.png';
+import UdemyLogoImg from '../../../static/udemy.png';
 
 export type CertInfo = {
   image_url: string;
@@ -16,6 +17,7 @@ export const CertSection: React.FC = () => {
   const certArr: string[] = [
     'AWS Certified Cloud Practitioner',
     'AWS Certified AI Practitioner',
+    'Udemy ML Completion Certificate',
   ];
 
   const image_url_arr: CertInfo[] = [
@@ -34,6 +36,14 @@ export const CertSection: React.FC = () => {
         'https://www.credly.com/earner/earned/badge/e1f0c726-78a5-4ee8-a427-8145fe6c5b52',
       issued_at: 'Jan 2025',
       expires_at: 'Jan 2028',
+    },
+    {
+      image_url: UdemyLogoImg,
+      img_alt: 'Udemy Logo Img',
+      verification_url:
+        'https://www.udemy.com/certificate/UC-68cbccd3-3941-424e-afde-cd777dc409ed/',
+      issued_at: '',
+      expires_at: '',
     },
   ];
   const [activeKey, setActiveKey] = React.useState(0);
@@ -102,13 +112,16 @@ const ContentWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${(props) => props.theme.black_75_translucent};
+  border-radius: 5px;
+  gap: 0px, 10px;
 `;
 
 const OptionGridWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${(props) => props.theme.black_75_translucent};
+  background-color: transparent;
   align-self: stretch;
   justify-content: space-around;
 `;
@@ -122,7 +135,7 @@ const OptionGrid = styled.ul`
 const CertOptionWrapper = styled.div<{ isActive: number; optionKey: number }>`
   display: flex;
   padding: 10px;
-  background-color: ${(props) => props.theme.black_75_translucent};
+  background-color: transparent;
   transition: background-color 0.15s;
   text-align: center;
   font-size: 20px;
@@ -166,6 +179,7 @@ const CertCardAreaWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   position: relative;
+  overflow-y: hidden;
 `;
 
 const CertCardWrapper = styled.div`

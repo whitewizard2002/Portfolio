@@ -29,7 +29,9 @@ const VerifyBtn: React.FC<VerifyBtnProps> = ({ url }) => {
 export const CertCard: React.FC<CertCardProps> = (props) => {
   return (
     <Wrapper optionKey={props.optionKey} activeKey={props.activeKey}>
-      <CertImg src={props.image_url} alt={props.img_alt} />
+      <ImgWrapper>
+        <CertImg src={props.image_url} alt={props.img_alt} />
+      </ImgWrapper>
       <DateWrapper>
         {props.issued_at} - {props.expires_at}
       </DateWrapper>
@@ -56,7 +58,7 @@ const goDown = keyframes`
 
 const Wrapper = styled.div<{ optionKey: number; activeKey: number }>`
   display: flex;
-  background-color: ${(props) => props.theme.black_75_translucent};
+  background-color: transparent;
   padding: 20px;
   border-radius: 5px;
   border: ${(props) => props.theme.white};
@@ -72,6 +74,12 @@ const Wrapper = styled.div<{ optionKey: number; activeKey: number }>`
     opacity: ${optionKey === activeKey ? 1 : 0};
     transition: opacity 0.5s ease-out;
   `}
+`;
+
+const ImgWrapper = styled.div`
+  display: flex;
+  height: 300px;
+  width: 300px;
 `;
 
 const CertImg = styled.img`
