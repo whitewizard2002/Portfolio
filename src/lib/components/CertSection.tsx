@@ -106,6 +106,10 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1em;
+
+  @media (max-width: 775px) {
+    padding: 0em;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -117,6 +121,16 @@ const ContentWrapper = styled.div`
   gap: 0px;
   width: 100%;
   max-width: 75%;
+
+  @media (max-width: 640px) {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 1em;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
 `;
 
 const OptionGridWrapper = styled.div`
@@ -145,7 +159,6 @@ const CertOptionWrapper = styled.div<{ isActive: number; optionKey: number }>`
   border-right: 0.36em solid ${(props) => props.theme.black_75_translucent};
   text-shadow:
     0rem 0rem 2rem ${(props) => props.theme.light_blue},
-    0rem 0rem 2rem ${(props) => props.theme.light_blue},
     0rem 0rem 1rem ${(props) => props.theme.light_blue};
   &:hover {
     background-color: ${(props) => props.theme.white_75_translucent};
@@ -167,7 +180,7 @@ const CertOptionWrapper = styled.div<{ isActive: number; optionKey: number }>`
 `;
 
 const CertOption = styled.li`
-  margin: 10px;
+  margin: 0.2em 0.5em;
   font-weight: bold;
 `;
 
@@ -179,7 +192,6 @@ const Divider = styled.div`
 
 const CertCardAreaWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
   position: relative;
   overflow-y: hidden;
   width: 100%;
@@ -189,4 +201,5 @@ const CertCardWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 448px;
+  padding: 2em 0em;
 `;

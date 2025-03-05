@@ -42,7 +42,7 @@ export const CertCard: React.FC<CertCardProps> = (props) => {
 
 const goUp = keyframes`
   from{
-    transform: translateY(0px);
+    transform: translateY(0%);
   }to{
     transform: translateY(-100%);
   }
@@ -52,23 +52,23 @@ const goDown = keyframes`
   from{
     transform: translateY(-100%);
   }to{
-    transform: translateY(0px);
+    transform: translateY(0%);
   }
 `;
 
 const Wrapper = styled.div<{ optionKey: number; activeKey: number }>`
   display: flex;
   background-color: transparent;
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 5px;
   border: ${(props) => props.theme.white};
   flex-direction: column;
   align-items: center;
-  width: 300px;
+  width: 100%;
   height: 408px;
 
   position: absolute;
-  left: 25%;
+  /* left: 25%; */
   /* transform: translate(-50%, -50%); */
 
   ${({ optionKey, activeKey }) => css`
@@ -80,14 +80,12 @@ const Wrapper = styled.div<{ optionKey: number; activeKey: number }>`
 
 const ImgWrapper = styled.div`
   display: flex;
-  max-width: 100%;
-  height: auto;
+  max-width: 300px;
 `;
 
 const CertImg = styled.img`
   display: flex;
   width: 100%;
-  height: auto;
 `;
 
 const DateWrapper = styled.div`
@@ -102,7 +100,7 @@ const DateWrapper = styled.div`
 `;
 
 const VerifyBtnWrapper = styled.button`
-  background: ${(props) => props.theme.black_75_translucent};
+  background: transparent;
   border: 2px solid ${(props) => props.theme.white};
   color: ${(props) => props.theme.white};
   padding: 10px 30px;
