@@ -48,21 +48,33 @@ export const IntroSection: React.FC<IntroSectionProps> = (props) => {
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 20px;
+  padding: 2em;
   background: url(${introBg});
   background-size: cover;
   background-position: center;
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 1em;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+  }
 `;
 
 const DpWrapper = styled.div`
   display: flex;
-  width: 25%;
+  width: fit-content;
   background-size: cover;
   background-position: center;
   justify-content: center;
+  margin-right: 1em;
+
+  @media (max-width: 640px) {
+    width: 100%;
+    margin-right: 0em;
+  }
 `;
 const fadeIn = keyframes`
   from{
