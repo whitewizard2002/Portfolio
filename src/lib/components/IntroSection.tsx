@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css, keyframes, useTheme } from 'styled-components';
 import { TextTyper } from './TextTyper';
-import introBg from '../../../static/db_bg.png';
+import introBg from '../../../static/dp_bg.png';
 import DpImg from '../../../static/dp.jpeg';
 interface IntroSectionProps {
   name: string;
@@ -113,6 +113,9 @@ const leftToRight = keyframes`
 const NameWrapper = styled.div`
   position: relative;
   animation: 0.75s ${leftToRight} ease-out forwards;
+  @media (max-width: 640px) {
+    text-align: center;
+  }
 `;
 
 const SummaryWrapper = styled.div<{ fadeAnimate: boolean }>`
